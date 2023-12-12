@@ -23,6 +23,7 @@ module "start_export_task_lambda" {
     SNAPSHOT_TASK_ROLE : aws_iam_role.rdsSnapshotExportTask.arn,
     SNAPSHOT_TASK_KEY : var.create_customer_kms_key ? aws_kms_key.snapshotExportEncryptionKey[0].arn : var.customer_kms_key_arn
     LOG_LEVEL : var.log_level,
+    DRY_RUN : var.dry_run ? "True" : "False",
   }
 
   attach_policy = true
