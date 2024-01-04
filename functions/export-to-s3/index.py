@@ -72,7 +72,7 @@ def start_export_task(exportTaskId: str, sourceArn: str, db: str):
             'S3Prefix': os.environ["SNAPSHOT_BUCKET_PREFIX"],
             'IamRoleArn': os.environ["SNAPSHOT_TASK_ROLE"],
             'KmsKeyId': os.environ["SNAPSHOT_TASK_KEY"],
-            'dry_run': True
+            'DryRun': True
         }
 
     logger.info(f"Snapshot export task started on {db}")
