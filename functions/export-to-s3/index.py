@@ -12,6 +12,9 @@ has been created in order to start an RDS snapshot export to S3.
 logger = logging.getLogger()
 logger.setLevel(os.getenv("LOG_LEVEL", logging.INFO))
 
+DRY_RUN = os.getenv("DRY_RUN", "False")
+
+
 def handler(event, context):
     if event["Records"][0]["EventSource"] != "aws:sns":
         logger.warning(
@@ -39,18 +42,8 @@ def handler(event, context):
                 exportTaskId = ((sourceId[4:] + '-').replace("--", "-") + messageId)[:60]
                 if exportTaskId[-1] == "-":
                     exportTaskId = exportTaskId[:-1]
-                response = boto3.client("rds").start_export_task(
-                    ExportTaskIdentifier=exportTaskId,
-                    SourceArn=sourceArn,
-                    S3BucketName=os.environ["SNAPSHOT_BUCKET_NAME"],
-                    S3Prefix=os.environ["SNAPSHOT_BUCKET_PREFIX"],
-                    IamRoleArn=os.environ["SNAPSHOT_TASK_ROLE"],
-                    KmsKeyId=os.environ["SNAPSHOT_TASK_KEY"],
-                )
-                response["SnapshotTime"] = str(response["SnapshotTime"])
+                start_export_task(exportTaskId, sourceArn, db)
 
-                logger.info(f"Snapshot export task started on {db}")
-                logger.info(json.dumps(response))
             else:
                 logger.info(f"Ignoring event notification for {sourceId} - {eventId}")
                 logger.info(f"notifications for {dbName} only")
@@ -59,3 +52,28 @@ def handler(event, context):
         logger.info(f"Ignoring event notification for {sourceId} - {eventId}")
         logger.info(f"Function is configured to accept {rdsEventID} only")
 
+
+def start_export_task(exportTaskId: str, sourceArn: str, db: str):
+    if DRY_RUN == "False":
+        response = boto3.client("rds").start_export_task(
+            ExportTaskIdentifier=exportTaskId,
+            SourceArn=sourceArn,
+            S3BucketName=os.environ["SNAPSHOT_BUCKET_NAME"],
+            S3Prefix=os.environ["SNAPSHOT_BUCKET_PREFIX"],
+            IamRoleArn=os.environ["SNAPSHOT_TASK_ROLE"],
+            KmsKeyId=os.environ["SNAPSHOT_TASK_KEY"],
+        )
+        response["SnapshotTime"] = str(response["SnapshotTime"])
+    else:
+        response = {
+            'ExportTaskIdentifier': exportTaskId,
+            'SourceArn': sourceArn,
+            'S3BucketName': os.environ["SNAPSHOT_BUCKET_NAME"],
+            'S3Prefix': os.environ["SNAPSHOT_BUCKET_PREFIX"],
+            'IamRoleArn': os.environ["SNAPSHOT_TASK_ROLE"],
+            'KmsKeyId': os.environ["SNAPSHOT_TASK_KEY"],
+            'DryRun': True
+        }
+
+    logger.info(f"Snapshot export task started on {db}")
+    logger.info(json.dumps(response))

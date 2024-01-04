@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:reg-xxx:account-id:rds-snapshots-creation-reg-xxx:c952a332-4691-4792-86da-38f73a706f22",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "f6583cf5-xxxx-57ee-xxxx-611c06c8a1a1",
+        "TopicArn": "arn:aws:sns:reg-xxx:account-id:rds-snapshots-creation-reg-xxx",
+        "Subject": null,
+        "Message": "{\"version\":\"0\",\"id\":\"aedf6b98-xxxx-dcbb-xxxx-e725bcd2c3b9\",\"detail-type\":\"RDS DB Snapshot Event\",\"source\":\"aws.rds\",\"account\":\"account-id\",\"time\":\"2023-12-05T18:42:10Z\",\"region\":\"reg-xxx\",\"resources\":[\"arn:aws:rds:reg-xxx:account-id:snapshot:rds:db-name-2023-12-05-18-08\"],\"detail\":{\"EventCategories\":[\"creation\"],\"SourceType\":\"SNAPSHOT\",\"SourceArn\":\"arn:aws:rds:reg-xxx:account-id:snapshot:rds:db-name-2023-12-05-18-08\",\"Date\":\"2023-12-05T18:42:10.408Z\",\"Message\":\"Automated snapshot created\",\"SourceIdentifier\":\"rds:db-name-2023-12-05-18-08\",\"EventID\":\"RDS-EVENT-0091\"}}",
+        "Timestamp": "2023-12-05T18:42:11.194Z",
+        "SignatureVersion": "1",
+        "Signature": "sig.xxx",
+        "SigningCertUrl": "https://sns.xxx",
+        "UnsubscribeUrl": "https://sns.xxx",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

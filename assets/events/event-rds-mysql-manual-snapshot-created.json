@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:reg-xxx:account-id:rds-snapshots-creation-reg-xxx:b047dad2-xxxx-4826-xxxx-88e46e209b60",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "8288b00c-xxxx-50ce-xxxx-edee2e2fb3c6",
+        "TopicArn": "arn:aws:sns:reg-xxx:account-id:rds-snapshots-creation-reg-xxx",
+        "Subject": null,
+        "Message": "{\"version\":\"0\",\"id\":\"10cabb8e-xxxx-9e15-xxxx-d9cd7b722b36\",\"detail-type\":\"RDS DB Snapshot Event\",\"source\":\"aws.rds\",\"account\":\"account-id\",\"time\":\"2023-11-30T12:01:48Z\",\"region\":\"reg-xxx\",\"resources\":[\"arn:aws:rds:reg-xxx:account-id:snapshot:manual-2023-11-30-12-01\"],\"detail\":{\"EventCategories\":[\"creation\"],\"SourceType\":\"SNAPSHOT\",\"SourceArn\":\"arn:aws:rds:reg-xxx:account-id:snapshot:manual-2023-11-30-12-01\",\"Date\":\"2023-11-30T12:01:48.760Z\",\"Message\":\"Manual snapshot created\",\"SourceIdentifier\":\"rds:manual-2023-11-30-12-01\",\"EventID\":\"RDS-EVENT-0042\"}}",
+        "Timestamp": "2023-11-30T12:01:49.357Z",
+        "SignatureVersion": "1",
+        "Signature": "sig.xxx",
+        "SigningCertUrl": "https://sns.xxx",
+        "UnsubscribeUrl": "https://sns.xxx",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

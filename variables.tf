@@ -80,6 +80,12 @@ variable "log_level" {
   default     = "INFO"
 }
 
+variable "dry_run" {
+  description = "Dry run start_export_task_lambda function?"
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "(Optional) A mapping of tags to assign to the bucket."
   type        = map(string)
